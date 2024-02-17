@@ -26,7 +26,7 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |-
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-          docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG 961669243007.dkr.ecr.us-east-1.amazonaws.com/cicd-docker-aws-ec2:$IMAGE_TAG:latest
+          docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG:latest
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG:latest
       - name: Deploy docker image to EC2
         env:
