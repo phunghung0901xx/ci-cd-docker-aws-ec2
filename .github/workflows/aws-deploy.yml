@@ -19,15 +19,15 @@ jobs:
       - name: Login to AWS ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-      - name: Build, push docker image
-        env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: cicd-docker-aws-ec2
-          IMAGE_TAG: ${{ github.sha }}
-        run: |-
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-          docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG:latest
-          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG:latest
+      # - name: Build, push docker image
+      #   env:
+      #     REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      #     REPOSITORY: cicd-docker-aws-ec2
+      #     IMAGE_TAG: ${{ github.sha }}
+      #   run: |-
+      #     docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+      #     docker tag $REGISTRY/$REPOSITORY:$IMAGE_TAG:latest
+      #     docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG:latest
       - name: Deploy docker image to EC2
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
